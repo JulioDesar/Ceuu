@@ -28,7 +28,7 @@ class PlatformSeeder extends Seeder
         ];
 
         foreach ($platforms as $platform) {
-            DB::table('plataform')->insert([
+            DB::table('plataforms')->insert([
                 'name' => $platform['name'],
                 'created_at' => now(),
             ]);

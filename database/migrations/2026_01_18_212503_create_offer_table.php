@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('offer', function (Blueprint $table) {
+        Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('game_id')->constrained('game')->onDelete('cascade');
-            $table->foreignId('platform_id')->constrained('plataform')->onDelete('cascade');
+            $table->foreignId('game_id')->constrained('games')->onDelete('cascade');
+            $table->foreignId('platform_id')->constrained('platforms')->onDelete('cascade');
             $table->decimal('price', 10, 2);
             $table->string('currency', 3)->default('BRL');
             $table->boolean('is_active')->default(true);
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('offer');
+        Schema::dropIfExists('offers');
     }
 };

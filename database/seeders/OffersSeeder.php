@@ -48,7 +48,7 @@ class OfferSeeder extends Seeder
         ];
 
         foreach ($offers as $offer) {
-            DB::table('offer')->insert([
+            DB::table('offers')->insert([
                 'game_id' => $offer['game_id'],
                 'platform_id' => $offer['platform_id'],
                 'price' => $offer['price'],

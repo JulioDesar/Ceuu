@@ -37,7 +37,7 @@ class GameSeeder extends Seeder
         ];
 
         foreach ($games as $game) {
-            DB::table('game')->insert([
+            DB::table('games')->insert([
                 'name' => $game,
                 'slug' => Str::slug($game),
                 'created_at' => now(),
