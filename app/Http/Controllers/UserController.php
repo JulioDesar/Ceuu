@@ -1,9 +1,8 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\UserFormRequest;
 use App\Models\User;
 
 class UserController extends Controller
@@ -13,8 +12,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('user.index', compact('users'));
+        $users = User::orderBy('created_at', 'desc')->get();
+
+        return view('user.index')->with('users', $users);
     }
 
     /**
@@ -28,22 +28,13 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserFormRequest $request)
     {
-        // $request->validate([
-        //     'name'=> 'required|min:3',
-        // ]);
 
-        $user = $request->name;
-        dd($request);
-    }
+        $request->merge(['password' => bcrypt($request->password)]);
+        User::create($request->all());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return redirect()->route('user.index')->with('success', 'User created successfully');
     }
 
     /**
@@ -51,15 +42,21 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('user.edit')->with('user', $user);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserFormRequest $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $data = $request->only(['name']);
+        if ($request->filled('password')) $data['password'] = bcrypt($request->password);
+        $user->update($data);
+        
+        return redirect()->route('user.index')->with('success', 'User updated successfully');
     }
 
     /**
@@ -67,6 +64,9 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('user.index')->with('success', 'User deleted successfully');
     }
 }

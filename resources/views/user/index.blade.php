@@ -1,11 +1,15 @@
 <x-layout>
-    <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-        href="{{ route('user.create') }}">
-        Adicionar
-    </a>
-   <ul>
-        @foreach ($users as $user)
-            <li>{{ $user }}</li>
-        @endforeach
-    </ul>
+    <x-list 
+        title="Usuários" 
+        :items="$users"
+        :columns="[
+            ['label' => 'ID', 'field' => 'id', 'class' => 'text-gray-900'],
+            ['label' => 'Nome', 'field' => 'name', 'class' => 'font-medium text-gray-900'],
+            ['label' => 'Email', 'field' => 'email', 'class' => 'text-gray-500'],
+            ['label' => 'Criado em', 'field' => 'created_at', 'format' => 'date', 'class' => 'text-gray-500'],
+        ]"
+        createRoute="user.create"
+        editRoute="user.edit"
+        deleteRoute="user.destroy"
+    />
 </x-layout>
