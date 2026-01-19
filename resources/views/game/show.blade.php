@@ -1,0 +1,3 @@
+<div>
+    {{ $game->name }}
+</div>

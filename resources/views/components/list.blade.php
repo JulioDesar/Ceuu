@@ -2,9 +2,9 @@
     'title',
     'items',
     'columns' => [],
-    'createRoute',
-    'editRoute',
-    'deleteRoute',
+    'createRoute' => null,
+    'editRoute' => null,
+    'deleteRoute' => null,
 ])
 
 <div class="container mx-auto px-4 py-8">

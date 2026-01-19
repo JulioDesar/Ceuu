@@ -31,7 +31,7 @@ class ProductKeySeeder extends Seeder
                 
                 DB::table('product_keys')->insert([
                     'offer_id' => $offerId,
-                    'key_value' => $key,
+                    'key' => $key,
                     'used_at' => $usedAt,
                     'created_at' => now(),
                 ]);
