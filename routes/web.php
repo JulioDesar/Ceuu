@@ -14,5 +14,3 @@ Route::resource('/user', UserController::class)->except(['show']);
 Route::resource('/game', GameController::class)->only(['index']);
 Route::get('/games/{slug}', [GameController::class, 'show'])
     ->name('game.show');
-
-Route::resource('/keys', ProductKeyController::class);
