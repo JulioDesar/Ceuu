@@ -3,10 +3,17 @@
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProductKeyController;
 use App\Http\Controllers\UserController;
+use App\Models\Offer;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $offers = Offer::with(['game', 'platform'])
+        ->where('is_active', true)
+        ->latest()
+        ->take(8)
+        ->get();
+    
+    return view('welcome', compact('offers'));
 });
 
 Route::resource('/user', UserController::class)->except(['show']);

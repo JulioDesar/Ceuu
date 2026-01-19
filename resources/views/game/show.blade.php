@@ -1,3 +1,3 @@
-<div>
+<x-layout>
     {{ $game->name }}
-</div>
+</x-layout>
