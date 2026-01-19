@@ -19,7 +19,11 @@ class GameController extends Controller
     public function show(string $slug)
     {
         $game = Game::where('slug', $slug)->firstOrFail();
+        $offers = $game->offers()
+            ->with('platform')
+            ->where('is_active', true)
+            ->get();
 
-        return view('game.show')->with('game', $game);
+        return view('game.show', compact('game', 'offers'));
     }
 }
